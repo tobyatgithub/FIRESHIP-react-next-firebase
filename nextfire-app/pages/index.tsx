@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
+import Enter from "./enter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +14,7 @@ export default function Home() {
       <div>
         <Loader show />
       </div>
+      <Enter />
     </main>
   );
 }
