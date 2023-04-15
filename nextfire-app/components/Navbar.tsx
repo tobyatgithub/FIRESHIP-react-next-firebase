@@ -4,9 +4,7 @@ import { UserContext } from "../lib/context";
 
 export default function Navbar(): JSX.Element {
   const { user, username } = useContext(UserContext);
-  //   const user: { photoURL: string } = { photoURL: "ok" };
-  //   const username: string | null = null;
-  //   const { user, username } = {"ok", "ba"};
+
   return (
     <nav className="navbar">
       <ul>
