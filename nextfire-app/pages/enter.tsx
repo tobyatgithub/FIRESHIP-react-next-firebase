@@ -2,7 +2,8 @@ import { auth, firestore, googleAuthProvider } from "../lib/firebase";
 import type { AppProps } from "next/app";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "../lib/context";
-import debounce from "lodash.debounce";
+// import debounce from "lodash.debounce";
+import { debounce } from "lodash";
 
 export default function Enter(props: AppProps) {
   const { user, username } = useContext(UserContext);
