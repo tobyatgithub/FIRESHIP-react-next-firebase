@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
 
 export default function Navbar(): JSX.Element {
-  const user: { photoURL: string } = { photoURL: "ok" };
-  const username: string | null = null;
+  const { user, username } = useContext(UserContext);
+  //   const user: { photoURL: string } = { photoURL: "ok" };
+  //   const username: string | null = null;
   //   const { user, username } = {"ok", "ba"};
   return (
     <nav className="navbar">
