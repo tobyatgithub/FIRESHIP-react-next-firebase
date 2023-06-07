@@ -55,6 +55,7 @@ export default function Post(props) {
   const postRef = firestore.doc(props.path);
   const [realtimePost] = useDocumentData(postRef);
 
+  // fallback to pre-rendered post if the realtime post is not ready
   const post = realtimePost || props.post;
 
   return (
