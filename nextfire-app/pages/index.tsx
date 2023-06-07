@@ -2,6 +2,7 @@ import PostFeed from "@/components/PostFeed";
 import Loader from "@/components/Loader";
 import { firestore, fromMillis, postToJSON } from "@/lib/firebase";
 import toast from "react-hot-toast";
+import MetaTags from "@/components/Metatags"
 
 import { useState } from "react";
 // import { Inter } from "next/font/google";
@@ -59,6 +60,7 @@ export default function Home(props) {
 
   return (
     <main>
+      <MetaTags title="Home" description="Home page" />
       <PostFeed posts={posts}/>
       {!loading && !postsEnd && <button onClick={getMorePosts}>Load more</button>}
       <Loader show={loading} />
