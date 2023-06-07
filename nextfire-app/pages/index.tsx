@@ -36,6 +36,8 @@ export default function Home(props) {
     }
     setLoading(true);
     const last = posts[posts.length - 1];
+    // find the timestamp of the last post
+    // type will be different depend on fetch from server or client :(
     const cursor = typeof last?.createdAt === "number" ? fromMillis(last.createdAt) : last.createdAt;
 
     const query = firestore
