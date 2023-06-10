@@ -8,10 +8,8 @@ export default function PostContent({ post }) {
         <div className="card">
             <h1>{post?.title}</h1>
             <span className="text-sm">
-                Written by {' '} 
-                <Link href={`/${post.username}/`}>
-                    <a>@{post.username}</a>
-                </Link>{' '}
+                Written by {' '}
+                <Link href={`/${post.username}/`}>@{post.username}</Link>{' '}
                 on {createdAt.toISOString()}
             </span>
             <ReactMarkdown>{post?.content}</ReactMarkdown>

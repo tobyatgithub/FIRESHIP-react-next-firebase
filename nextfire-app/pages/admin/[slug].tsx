@@ -27,7 +27,7 @@ function PostManager() {
     const [preview, setPreview] = useState(false);
 
     const router = useRouter();
-    const { slug } = router.query; 
+    const { slug } = router.query;
 
     const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
     const [post] = useDocumentData(postRef); // listen to the post in real time
@@ -58,8 +58,12 @@ function PostManager() {
 
 function PostForm({ defaultValues, postRef, preview }) {
     // watch: will treat the thing as a state, and will update the thing when it changes.
-    const { register, handleSubmit, reset, watch } = useForm({ defaultValues, mode: 'onChange' });
+    const { register, handleSubmit, reset, watch, formState } = useForm({ defaultValues, mode: 'onChange' });
     // register is used to connect user input with form.
+
+    // TOBY: notice the errors have been moved inside formState from useForm().
+    const { isValid, isDirty, errors } = formState;
+
     const updatePost = async ({ content, published }) => {
         await postRef.update({
             content,
@@ -70,8 +74,6 @@ function PostForm({ defaultValues, postRef, preview }) {
         reset({ content, published });
         toast.success('Post updated successfully!');
     };
-
-    console.log("toby, styles = ", styles);
     
     return (
         <form onSubmit={handleSubmit(updatePost)}>
@@ -82,13 +84,24 @@ function PostForm({ defaultValues, postRef, preview }) {
             )}
 
             <div className={preview ? styles.hidden : styles.controls}>
-                <textarea name="content" {...register("content", {required: "Required",})}></textarea>
+                <textarea {...register("content", {
+                // <textarea name="content" {...register("content", {
+                    required: { value: true, message: "content is required" },
+                    maxLength: { value: 20000, message: "Max length is 20000 characters" },
+                    minLength: { value: 10, message: "content is too short" },
+                })}>
+                </textarea>
+
+                {/* note: content = the name of"content" defined in textarea above.*/}
+                {errors.content && <p className="text-danger">{errors.content.message}</p>}
+
                 <fieldset>
-                    <input className={styles.checkbox} name="published" type="checkbox" {...register("published", {required: "Required"})} />
+                    {/* <input className={styles.checkbox} name="published" type="checkbox" {...register("published", { required: "Required" })} /> */}
+                    <input className={styles.checkbox} type="checkbox" {...register("published", { required: "Required" })} />
                     <label>Published</label>
                 </fieldset>
 
-                <button type="submit" className='btn-green'>Save Changes</button>
+                <button type="submit" disabled={!isDirty || !isValid} className='btn-green'>Save Changes</button>
             </div>
         </form>
     )

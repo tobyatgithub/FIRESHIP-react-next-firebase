@@ -24,22 +24,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-async function test() {
-  // const postsQuery = firestore
-  //   .collection('posts')
-  //   .where('published', '==', true)
-  //   .orderBy('createdAt', 'desc')
-  //   .limit(LIMIT);
-  const postsQuery = firestore.collectionGroup('posts').where('published', '==', true);
-  const posts2 = (await postsQuery.get()).docs.map(postToJSON);
-  console.log("toby2, posts2 = ", posts2);
-}
-
 export default function Home(props) {
-  console.log("toby, props = ", props);
-
-  test();
-
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
 

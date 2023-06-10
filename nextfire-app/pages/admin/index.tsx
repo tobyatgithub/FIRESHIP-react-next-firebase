@@ -65,7 +65,7 @@ function CreateNewPost() {
             username,
             published: false,
             content: '# hello world!',
-            craetedAt: serverTimestamp(),
+            createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
             heartCount: 0,
         };
