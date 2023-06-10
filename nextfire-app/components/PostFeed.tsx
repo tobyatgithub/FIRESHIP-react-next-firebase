@@ -9,10 +9,7 @@ export default function PostFeed({ posts, admin }) {
 }
 
 function PostItem({ post, admin = false }) {
-  // TODO: wordCount seems wrong.
-  // const wordCount = post?.content.trim().split(/\s+g/).length;
   const wordCount = post?.content.trim().split(" ").length;
-  console.log("toby, word content = ", post.content.trim().split(" "));
   
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
 
