@@ -50,7 +50,7 @@ function SignOutButton() {
 
 function UsernameForm() {
   const doingDebug = true;
-  const [formValue, setFormValue] = useState("");
+  const [formValue, setFormValue] = useState(null);
   const [isValid, setIsValid] = useState(false);
   const [loading, setLoading] = useState(false);
 
