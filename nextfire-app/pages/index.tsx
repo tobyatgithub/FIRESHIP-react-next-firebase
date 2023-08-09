@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const LIMIT = 5;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const postsQuery = firestore
     .collectionGroup('posts')
     .where('published', '==', true)
